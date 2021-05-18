@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_sound/flutter_sound.dart';
 
-
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -30,19 +29,18 @@ class PlaybackButton extends StatefulWidget {
   _PlaybackButtonState createState() => _PlaybackButtonState();
 }
 
-
 class _PlaybackButtonState extends State<PlaybackButton> {
   bool _isPlaying = false;
-  FlutterSoundPlayer myPlayer = FlutterSoundPlayer();
 
   void _stop() {
-    myPlayer.closeAudioSession();
-    myPlayer.stopPlayer();
+    // myPlayer.closeAudioSession();
+    // myPlayer.stopPlayer();
   }
 
   void _play() async {
-    myPlayer.openAudioSession();
-    myPlayer.startPlayer(fromURI: 'assets/minato_cast.mp3');
+    FlutterSound flutterSound = FlutterSound();
+
+    String path = await flutterSound.startPlayer('assets/minato_cast.mp3');
   }
 
   @override
