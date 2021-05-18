@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_sound/flutter_sound.dart';
+
 
 void main() => runApp(MyApp());
 
@@ -31,10 +33,17 @@ class PlaybackButton extends StatefulWidget {
 
 class _PlaybackButtonState extends State<PlaybackButton> {
   bool _isPlaying = false;
+  FlutterSoundPlayer myPlayer = FlutterSoundPlayer();
 
-  void _stop() {}
+  void _stop() {
+    myPlayer.closeAudioSession();
+    myPlayer.stopPlayer();
+  }
 
-  void _play() {}
+  void _play() async {
+    myPlayer.openAudioSession();
+    myPlayer.startPlayer(fromURI: 'assets/minato_cast.mp3');
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +55,7 @@ class _PlaybackButtonState extends State<PlaybackButton> {
         } else {
           _play();
         }
-        _isPlaying = !_isPlaying;
+        setState(() => _isPlaying = !_isPlaying);
       },
     );
   }
